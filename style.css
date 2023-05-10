@@ -20,6 +20,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: default;
 }
 
 /* LAYOUT */
@@ -66,9 +67,11 @@ main {
 .player--active {
   background-color: rgba(255, 255, 255, 0.4);
 }
+
 .player--active .name {
   font-weight: 700;
 }
+
 .player--active .score {
   font-weight: 400;
 }
@@ -132,9 +135,11 @@ main {
 .btn--new {
   top: 4rem;
 }
+
 .btn--roll {
   top: 39.3rem;
 }
+
 .btn--hold {
   top: 46.1rem;
 }
@@ -155,6 +160,8 @@ main {
   transform: translateX(-50%);
   height: 10rem;
   box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
+  border-radius: 9px;
+
 }
 
 .player--winner {
