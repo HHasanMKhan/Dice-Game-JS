@@ -1,6 +1,8 @@
 'use strict';
 
 // Selecting elements
+const player1El = document.querySelector('.player--0');
+const player2El = document.querySelector('.player--1');
 const score0El = document.getElementById('score--0');
 const score1El = document.getElementById('score--1');
 const diceImg = document.querySelector('.dice');
@@ -17,7 +19,12 @@ score1El.textContent = 0;
 //Adding hidden class to the dice image
 diceImg.classList.add('hidden');
 
+const finalScores = [0, 0];
+
+// Score for the current turn
 let currentScore = 0;
+
+let activePlayer = 0;
 
 rollDiceBtn.addEventListener('click', function () {
   const diceNum = Math.trunc(Math.random() * 6 + 1);
@@ -28,14 +35,22 @@ rollDiceBtn.addEventListener('click', function () {
 
   for (let i = 1; i <= 6; i++) {
     if (diceNum === i) {
+      // Display correct dice image
       diceImg.src = `img/dice-${i}.png`;
 
       if (diceNum !== 1) {
+        // Add dice to current score
         currentScore += diceNum;
-        currentScore0.textContent = currentScore;
+        document.getElementById(`current--${activePlayer}`).textContent =
+          currentScore;
       } else {
+        // Switch to next player
         currentScore = 0;
-        currentScore0.textContent = currentScore;
+        document.getElementById(`current--${activePlayer}`).textContent =
+          currentScore;
+        activePlayer = activePlayer === 0 ? 1 : 0;
+        player1El.classList.toggle('player--active');
+        player2El.classList.toggle('player--active');
       }
     }
   }
