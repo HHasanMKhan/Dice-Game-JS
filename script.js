@@ -26,6 +26,19 @@ let currentScore = 0;
 
 let activePlayer = 0;
 
+const switchPlayer = function () {
+  currentScore = 0;
+  document.getElementById(`current--${activePlayer}`).textContent =
+    currentScore;
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  player1El.classList.toggle('player--active');
+  player2El.classList.toggle('player--active');
+};
+
+const hideButton = function (element) {
+  element.style.display = 'none';
+};
+
 rollDiceBtn.addEventListener('click', function () {
   const diceNum = Math.trunc(Math.random() * 6 + 1);
 
@@ -38,19 +51,14 @@ rollDiceBtn.addEventListener('click', function () {
       // Display correct dice image
       diceImg.src = `img/dice-${i}.png`;
 
-      if (diceNum !== 1) {
+      if (diceNum !== 10) {
         // Add dice to current score
         currentScore += diceNum;
         document.getElementById(`current--${activePlayer}`).textContent =
           currentScore;
       } else {
         // Switch to next player
-        currentScore = 0;
-        document.getElementById(`current--${activePlayer}`).textContent =
-          currentScore;
-        activePlayer = activePlayer === 0 ? 1 : 0;
-        player1El.classList.toggle('player--active');
-        player2El.classList.toggle('player--active');
+        switchPlayer();
       }
     }
   }
@@ -63,4 +71,20 @@ holdBtn.addEventListener('click', function () {
   currentScore = 0;
   document.getElementById(`current--${activePlayer}`).textContent =
     currentScore;
+  if (finalScores[activePlayer] >= 10) {
+    (document.getElementById(`score--${[activePlayer]}`).textContent =
+      finalScores[activePlayer]),
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add('player--winner'),
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove('player--active');
+    hideButton(diceImg);
+    hideButton(rollDiceBtn);
+    hideButton(holdBtn);
+    // hideButton(document.querySelector('.current'));
+  } else {
+    switchPlayer();
+  }
 });
