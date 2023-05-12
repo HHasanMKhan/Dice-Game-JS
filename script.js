@@ -55,3 +55,12 @@ rollDiceBtn.addEventListener('click', function () {
     }
   }
 });
+
+holdBtn.addEventListener('click', function () {
+  finalScores[activePlayer] += currentScore;
+  document.getElementById(`score--${[activePlayer]}`).textContent =
+    finalScores[activePlayer];
+  currentScore = 0;
+  document.getElementById(`current--${activePlayer}`).textContent =
+    currentScore;
+});
