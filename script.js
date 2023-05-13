@@ -83,7 +83,16 @@ holdBtn.addEventListener('click', function () {
     hideButton(diceImg);
     hideButton(rollDiceBtn);
     hideButton(holdBtn);
-    // hideButton(document.querySelector('.current'));
+    for (let i = 0; i < document.querySelectorAll('.current').length; i++) {
+      document.querySelectorAll('.current')[i].style.display = 'none';
+    }
+    const winner = document.createElement('div');
+    const winnerText = document.createTextNode(
+      `Player ${activePlayer + 1} wins!`
+    );
+    winner.appendChild(winnerText);
+    document.getElementsByTagName('main')[0].appendChild(winner).style.cssText =
+      'position: absolute; top: 46.1rem; color: rgba(255, 255, 255, 0.6); left: 50%; transform: translateX(-50%); font-size: 5rem; text-transform: uppercase;';
   } else {
     switchPlayer();
   }
